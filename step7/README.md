@@ -40,4 +40,75 @@ cluster.nacos.user/password 可以不写
 host是本机器的ip
 port是11180端口，记得集群内的每个机器的ip不一样，scp的时候记得修改
 ```
+![image](https://user-images.githubusercontent.com/39818267/139527649-a6a26b2a-5af4-4f8e-ad4a-b990dc39d330.png)
+![image](https://user-images.githubusercontent.com/39818267/139527655-36d3be5d-daf6-43d0-9301-0580b39ccd7f.png)
 
+```
+storage.selector: elasticsearch7
+storage.elasticsearch7.namespace: xxx-logs
+storage.elasticsearch7.clusterNodes: 192.168.xxx:9200,192.168.xxx:9200,192.168.xxx:9200
+```
+![image](https://user-images.githubusercontent.com/39818267/139527674-1d3dc465-bab4-4a1e-b679-552a892be15d.png)
+
+```
+3.4 skywalking-agent 
+只需要打开配置文件修改一下即可
+collector.backend_service
+找到对应的地址
+
+制作一个包含skywalking-agent的镜像即可或者直接使用我的
+docker pull wuchenyanghaoshuai/jre-sky-agent:v1
+在/data/agent下有配置文件，这个不需要动，只需要在k8s的yaml里指定evn即可
+然后访问skywalking的ui即可访问到
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kkb-corgi-tenant
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge:
+      maxUnavailable: 0
+  minReadySeconds: 5
+  revisionHistoryLimit: 10
+  template:
+    metadata:
+      labels:
+        app: kkb-corgi-tenant
+    spec:
+      containers:
+      - name: kkb-corgi-tenant
+        image: registry.cn-beijing.aliyuncs.com/kaikeba/kkb-corgi-tenant-biz:{{build_image_tag}}
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /manage/health
+            port: 8081
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+        resources:
+          requests:
+            memory: "256Mi"
+          limits:
+            memory: "2300Mi"
+        env:
+        - name: APP_ENV
+          value: pre
+        - name: JAVA_OPTS
+          value: "-Xms2g -Xmx2g -javaagent:/data/agent/skywalking-agent.jar -javaagent:/data/agent/jmx_prometheus_javaagent-0.14.0.jar=9180:/data/agent/jmx_exporter.yml"
+        - name: APP_ID
+          value: kkb-corgi-tenant
+        - name: SW_AGENT_NAME
+          value: kkb-corgi-tenant
+        - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+          value: xxxxxxxxx:11800
+        - name: SERVICE_DISCOVERY_ADDR
+          value: xxxxxx:8848            
+        - name: SERVICE_DISCOVERY_NAMESPACE
+          value: xxxx
+```
