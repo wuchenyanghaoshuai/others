@@ -8,4 +8,5 @@
 # 6.Jenkins集群搭建
 # 7.k8s上使用skywalking链路监控
 # 8.小命令
+# 9.二进制编译nginx
 ```
