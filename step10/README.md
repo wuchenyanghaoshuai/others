@@ -24,7 +24,7 @@ Velero 非常适合灾难恢复用例，以及在集群上执行系统操作（�
 注意此块的--volume 要跟自己环境一致,然后打开ip:9000,输入账号密码即可登录,登录上去自己创建一个bucket
 docker run -d  --name minio     --publish 9000:9000     --publish 9001:9001     --env MINIO_ACCESS_KEY="admin"     --env MINIO_SECRET_KEY="admin123"     --volume /chenyang:/data     bitnami/minio:latest
 ```
-![image](https://user-images.githubusercontent.com/39818267/142495171-2a1583c4-6086-42c1-926d-4dedc8f43691.png)
+![image](https://user-images.githubusercontent.com/39818267/142497549-1900982e-27fd-4840-ae58-084135161375.png)
 # 安装velero
 ```
 1. 下载安装velero
@@ -56,3 +56,4 @@ aws_secret_access_key = admin123
    kubectl delete ns kkb-test
    velero restore create --from-backup test-backup
 ```
+![image](https://user-images.githubusercontent.com/39818267/142497611-f4a7ed76-ad2d-4639-9a29-2bdeff6f65e1.png)
