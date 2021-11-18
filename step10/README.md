@@ -25,3 +25,34 @@ Velero 非常适合灾难恢复用例，以及在集群上执行系统操作（�
 docker run -d  --name minio     --publish 9000:9000     --publish 9001:9001     --env MINIO_ACCESS_KEY="admin"     --env MINIO_SECRET_KEY="admin123"     --volume /chenyang:/data     bitnami/minio:latest
 ```
 ![image](https://user-images.githubusercontent.com/39818267/142495171-2a1583c4-6086-42c1-926d-4dedc8f43691.png)
+# 安装velero
+```
+1. 下载安装velero
+注意请确保你的.kube下有可以正常链接到k8s集群的config
+wget https://github.com/vmware-tanzu/velero/releases/download/v1.7.0/velero-v1.7.0-linux-amd64.tar.gz
+tar -xf velero-v1.7.0-linux-amd64.tar.gz
+mv velero-v1.7.0-linux-amd64/velero /usr/local/bin
+velero version (查看到版本就可以了,看不到的话应该是没指定k8s集群)
+2. 创建minio凭证
+vim  credentials-velero
+[default]
+aws_access_key_id = admin
+aws_secret_access_key = admin123
+3.安装velero
+   velero install    \
+     --provider aws   \
+     --bucket k8s-backup   \
+     --image velero/velero:v1.6.3  \
+     --plugins velero/velero-plugin-for-aws:v1.2.1  \
+     --namespace velero  \
+     --secret-file ./credentials-velero  \
+     --use-volume-snapshots=false \
+     --use-restic \
+     --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=http://192.168.1.213:9000
+4. 查看k8s集群内是否多一个namespace,然后查看对应的pod日志,看有没有报错,没有报错继续进行
+5. 对某一个namespace进行备份,完成以后立即到minio的页面查看是否生成对应的目录
+   velero backup create test-backup --include-namespaces test  --wait
+6. 到k8s集群删除namespace，并且恢复,restore完成以后去集群查看,发现刚刚删除的kkb-test命名空间又存在了,并且资源都是正确的
+   kubectl delete ns kkb-test
+   velero restore create --from-backup test-backup
+```
