@@ -24,3 +24,4 @@ Velero 非常适合灾难恢复用例，以及在集群上执行系统操作（�
 注意此块的--volume 要跟自己环境一致,然后打开ip:9000,输入账号密码即可登录,登录上去自己创建一个bucket
 docker run -d  --name minio     --publish 9000:9000     --publish 9001:9001     --env MINIO_ACCESS_KEY="admin"     --env MINIO_SECRET_KEY="admin123"     --volume /chenyang:/data     bitnami/minio:latest
 ```
+![image](https://user-images.githubusercontent.com/39818267/142495171-2a1583c4-6086-42c1-926d-4dedc8f43691.png)
