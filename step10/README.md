@@ -19,3 +19,8 @@ Velero 非常适合灾难恢复用例，以及在集群上执行系统操作（�
 4. 将BackupController使得对象存储服务的调用-例如，AWS S3 -上传备份文件
 ```
 ![image](https://user-images.githubusercontent.com/39818267/142493899-5fdc5c99-ec7e-4259-bff3-8a4fb5bfb796.png)
+# 安装minio
+```
+注意此块的--volume 要跟自己环境一致,然后打开ip:9000,输入账号密码即可登录,登录上去自己创建一个bucket
+docker run -d  --name minio     --publish 9000:9000     --publish 9001:9001     --env MINIO_ACCESS_KEY="admin"     --env MINIO_SECRET_KEY="admin123"     --volume /chenyang:/data     bitnami/minio:latest
+```
