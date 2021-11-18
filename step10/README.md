@@ -18,3 +18,4 @@ Velero 非常适合灾难恢复用例，以及在集群上执行系统操作（�
 3. 在BackupController开始备份过程。它通过向 API 服务器查询资源来收集要备份的数据。
 4. 将BackupController使得对象存储服务的调用-例如，AWS S3 -上传备份文件
 ```
+![image](https://user-images.githubusercontent.com/39818267/142493899-5fdc5c99-ec7e-4259-bff3-8a4fb5bfb796.png)
