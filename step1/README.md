@@ -4,6 +4,8 @@
      # docker exec -it  ec784143af58 bash
   (2)备份数据库到目录
      # mongodump -h 127.0.0.1:27017 -d yapi -o /root/data/
+       如果备份的mongo数据库有密码的话还需要额外指定一个参数才可以--authenticationDatabase admin
+  mongodump -h 127.0.0.1:27017 --authenticationDatabase admin  -u xxx -p xxx -d yapi -o /yapidata/yapi/      
 ```
 2.启动一个新mongodb
 ```
