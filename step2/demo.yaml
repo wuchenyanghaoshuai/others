@@ -5,8 +5,7 @@ metadata:
   namespace: default
 subsets:
 - addresses:
-  - ip: 172.29.9.51
-  - ip: 172.29.9.52
+  - ip: 192.168.1.8
   ports:
   - name: mysql
     port: 3306
@@ -18,6 +17,11 @@ kind: Service
 metadata:
   name: mysql-external
   namespace: default
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9104"
+    prometheus.io/path: /metrics
+
 spec:
   type: ClusterIP
   ports:
