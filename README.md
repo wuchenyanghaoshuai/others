@@ -11,4 +11,8 @@
 # 9.二进制编译nginx
 # 10.k8s集群备份之velero
 # 11.es配置冷热数据节点
+# 12.gitlab备份恢复
+# 13.jenkins安装插件
+# 14.k8s高版本解决nfs的问题
+# 15.nginx配置
 ```
