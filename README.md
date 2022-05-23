@@ -15,4 +15,8 @@
 # 13.jenkins安装插件
 # 14.k8s高版本解决nfs的问题
 # 15.nginx配置
+# 16.etcd集群
+# 17.k8s pod cannot allocate memory
+# 18.k8s磁盘有空间，但查看容器日志显示没有空间
+# 19. nginx验证
 ```
