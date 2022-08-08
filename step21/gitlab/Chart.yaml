@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 14.2.3
+description: A Helm chart for GitLab
+icon: https://avatars.githubusercontent.com/u/176152?s=460&v=4
+maintainers:
+- email: github.com@nemonik.com
+  name: Michael Joseph Walsh
+name: gitlab
+type: application
+version: 14.2.3

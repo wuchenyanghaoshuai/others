@@ -19,4 +19,6 @@
 # 17.k8s pod cannot allocate memory
 # 18.k8s磁盘有空间，但查看容器日志显示没有空间
 # 19. nginx验证
+# 20. windows破解navicat_premium
+# 21. helm部署gitlab
 ```
