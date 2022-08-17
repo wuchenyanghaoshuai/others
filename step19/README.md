@@ -15,3 +15,16 @@ location /.well-known/apple-app-site-association {
         default_type application/octet-stream;
         return 200  '{\"applinks\": {\"apps\": [],\"details\": [{\"appID\": \"VSK98DGSS7.com.miduiedu.mdeapp\",\"paths\": [ \"/midui/*\"]}]}}' ;
     }
+
+
+location /abc {
+        alias /data/www/default/abc;
+        index index.html index.htm;
+        try_files $uri $uri /abc/index.html;
+	}
+
+location /def {
+        alias /data/www/default/def;
+        index index.html index.htm;
+        try_files $uri $uri /def/index.html;
+        }
