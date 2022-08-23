@@ -21,4 +21,6 @@
 # 19. nginx验证
 # 20. windows破解navicat_premium
 # 21. helm部署gitlab
+# 22. kubernetes部署nacos
+# 23. kubernetes部署xxl-job
 ```

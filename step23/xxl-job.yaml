@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: xxl-job-admin
+  name: xxl-job-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xxl-job-admin
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xxl-job-admin
+    spec:
+      containers:
+        - image: xuxueli/xxl-job-admin:2.3.1
+          imagePullPolicy: IfNotPresent
+          name: xxl-job-admin
+          ports:
+          - containerPort: 8080
+            name: tcp-8080
+            protocol: TCP
+          env:
+            - name: PARAMS
+              value: "--spring.datasource.url=jdbc:mysql://mysql:3306/xxl_job?Unicode=true&characterEncoding=UTF-8&useSSL=false --spring.datasource.username=root --spring.datasource.password=root "
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xxl-job-admin
+spec:
+  ports:
+    - name: tcp-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 10800
+  selector:
+    app: xxl-job-admin
+  sessionAffinity: None
+  type: NodePort
