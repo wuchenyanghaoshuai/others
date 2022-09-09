@@ -23,4 +23,6 @@
 # 21. helm部署gitlab
 # 22. kubernetes部署nacos
 # 23. kubernetes部署xxl-job
+# 24. kubernetes部署nexus
+# 25. python使用客户端库创建pv,pvc
 ```
