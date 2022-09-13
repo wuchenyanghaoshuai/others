@@ -302,3 +302,34 @@ except Exception as e:
     print("Exception when calling CoreV1Api->create_namespaced_persistent_volume_claim: %s\n" % e)
 
 ```
+
+# 手动创建deployment
+```
+resources = client.V1ResourceRequirements(limits={"cpu": "4", "memory": "8Gi"},
+                                         requests={"cpu": "1", "memory": "2Gi"})
+image="nginx:alpine"
+body=client.V1Deployment(
+    api_version="apps/v1",
+    kind="Deployment",
+    metadata=client.V1ObjectMeta(name="test-web"),
+    spec=client.V1DeploymentSpec(
+        replicas=3,
+        selector={'matchLabels': {"app":"test"} },
+        template=client.V1PodTemplateSpec(
+
+            metadata=client.V1ObjectMeta(labels={"app":"test"}),
+            spec=client.V1PodSpec(
+                containers=[client.V1Container(
+                            name="web",
+                            image=image,
+                            env=[{"name": "TEST", "value": "123"}, {"name": "DEV", "value": "456"}],
+                            ports=[client.V1ContainerPort(container_port=80)],
+                            resources=resources,
+                        )]
+        )
+),
+    )
+
+)
+client.AppsV1Api().create_namespaced_deployment(namespace="default",body=body)
+```
