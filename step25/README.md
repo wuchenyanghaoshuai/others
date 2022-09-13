@@ -227,7 +227,7 @@ def create_k8s_nfs_resources(self) -> bool:
         return True 
 ```
 
-###
+### Example 手动测试
 ```
 from kubernetes import config,client
 import os,hashlib,random
