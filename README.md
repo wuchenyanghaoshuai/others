@@ -25,4 +25,6 @@
 # 23. kubernetes部署xxl-job
 # 24. kubernetes部署nexus
 # 25. python使用客户端库创建pv,pvc
+# 26. k8s创建mysql主从集群
+# 27. docker安装配置ldap
 ```
