@@ -29,7 +29,7 @@
 
 > (示例图)
 
-![image-20221013162629015](/Users/wuchenyang/Library/Application Support/typora-user-images/image-20221013162629015.png)
+<img width="470" alt="image" src="https://user-images.githubusercontent.com/39818267/195546352-bf07b60e-f93a-40d1-8d47-ce6938a1b0c7.png">
 
 ## 安装LDAP
 
@@ -63,7 +63,7 @@ docker run -d --privileged -p 80:80 --name myphpldapadmin \
 --detach osixia/phpldapadmin
 ```
 
-![image-20221013163321040](/Users/wuchenyang/Library/Application Support/typora-user-images/image-20221013163321040.png)
+<img width="872" alt="image" src="https://user-images.githubusercontent.com/39818267/195546445-b87dd66f-d869-41b2-af76-02bbba1afc72.png">
 
 - `login DN` ：cn=admin,dc=xyz,dc=com
 - `Password`: 123456
