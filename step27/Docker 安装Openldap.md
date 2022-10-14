@@ -67,3 +67,17 @@ docker run -d --privileged -p 80:80 --name myphpldapadmin \
 
 - `login DN` ：cn=admin,dc=xyz,dc=com
 - `Password`: 123456
+## 手动在web界面倒入用户语法
+
+```
+dn: cn=wuchenyang,ou=people,dc=ailieyun,dc=com
+ou: people
+uid: wuchenyang
+sn: wuchenyang
+cn: wuchenyang@ailieyun.com
+givenName: wuchenyang
+displayName: wuchenyang
+mail: wuchenyang@ailieyun.com
+objectClass: inetOrgPerson
+userpassword: 123456
+```
