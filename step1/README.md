@@ -51,8 +51,10 @@ vim config.json
    }
 }
 ```
-#具体看这个链接https://hellosean1025.github.io/yapi/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
-5.初始化yapi数据库索引以及管理员账号
+# 具体看这个链接https://hellosean1025.github.io/yapi/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
+
+
+# 5.初始化yapi数据库索引以及管理员账号
 ```
 docker run -it --rm \
   --link mongo-yapi:mongo \
