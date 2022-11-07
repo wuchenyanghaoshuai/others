@@ -1,4 +1,4 @@
-#1.备份mongodb内的yapi database
+### 1.备份mongodb内的yapi database
 ```
   (1)登录到mongo数据库内 
      # docker exec -it  ec784143af58 bash
@@ -7,7 +7,7 @@
        如果备份的mongo数据库有密码的话还需要额外指定一个参数才可以--authenticationDatabase admin
   mongodump -h 127.0.0.1:27017 --authenticationDatabase admin  -u xxx -p xxx -d yapi -o /yapidata/yapi/      
 ```
-2.启动一个新mongodb
+### 2.启动一个新mongodb
 ```
   （1）docker volume create mongo-data
   （2）docker run -d \
@@ -17,7 +17,7 @@
   -e MONGO_INITDB_ROOT_PASSWORD=anoyi.com \
   mongo
 ```
-3.恢复刚刚备份的数据库到新的mongodb中
+### 3.恢复刚刚备份的数据库到新的mongodb中
 ```
   (1)mongorestore -h 127.0.0.1:27017  -d yapi --drop  --dir /root/data/yapi
   注意: --drop 慎用; --drop:恢复的时候，先删除当前数据，然后恢复备份的数据。就是说，恢复后，备份后添加修改的数据都会被删除
@@ -26,7 +26,7 @@
 https://www.jianshu.com/p/de26ad0110b0
 
 
-4.自定义yapi配置文件
+### 4.自定义yapi配置文件
 ```
 vim config.json
 {
@@ -51,10 +51,12 @@ vim config.json
    }
 }
 ```
-# 具体看这个链接https://hellosean1025.github.io/yapi/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
+
+### 具体看这个链接https://hellosean1025.github.io/yapi/devops/index.html#%e6%9c%8d%e5%8a%a1%e5%99%a8%e7%ae%a1%e7%90%86
 
 
-# 5.初始化yapi数据库索引以及管理员账号
+###  5.初始化yapi数据库索引以及管理员账号
+
 ```
 docker run -it --rm \
   --link mongo-yapi:mongo \
@@ -64,7 +66,9 @@ docker run -it --rm \
   registry.cn-hangzhou.aliyuncs.com/anoyi/yapi \
   run install-server
 ```
-6.docker启动yapi
+
+### 6.docker启动yapi
+
 ```
 docker run -d \
   --name yapi \
@@ -75,7 +79,8 @@ docker run -d \
   registry.cn-hangzhou.aliyuncs.com/anoyi/yapi \
   server/app.js
 ```
-7.访问IP:Port看是否出现登录界面以及ldap集成
+
+### 7.访问IP:Port看是否出现登录界面以及ldap集成
 https://www.jianshu.com/p/a97d2efb23c5
 
 
