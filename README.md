@@ -27,4 +27,6 @@
 # 25. python使用客户端库创建pv,pvc
 # 26. k8s创建mysql主从集群
 # 27. docker安装配置ldap
+# 28. java添加证书验证keytool Dockerfile
+# 29. docker-compose 安装使用nextcloud个人网盘
 ```
