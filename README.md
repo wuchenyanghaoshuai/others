@@ -29,4 +29,5 @@
 # 27. docker安装配置ldap
 # 28. java添加证书验证keytool Dockerfile
 # 29. docker-compose 安装使用nextcloud个人网盘
+# 30. k8s nexus
 ```

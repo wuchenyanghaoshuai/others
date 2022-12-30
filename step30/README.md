@@ -1,0 +1,88 @@
+vim nexus.yaml
+```
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nexus-data-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  # 指定 storageClass 的名字，这里使用默认的 managed-nfs-storage
+  storageClassName: "managed-nfs-storage"
+  resources:
+    requests:
+      storage: 30Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexus3
+  labels:
+    app: nexus3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus3
+  template:
+    metadata:
+      labels:
+        app: nexus3
+    spec:
+      containers:
+      - name: nexus3
+        image: sonatype/nexus3:3.32.0
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8081
+            name: web
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 100
+          periodSeconds: 30
+          failureThreshold: 6
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 100
+          periodSeconds: 30
+          failureThreshold: 6
+        resources:
+          limits:
+            cpu: 4000m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: nexus-data
+          mountPath: /nexus-data
+      volumes:
+        - name: nexus-data
+          persistentVolumeClaim:
+            claimName: nexus-data-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexus3
+  labels:
+    app: nexus3
+spec:
+  selector:
+    app: nexus3
+  type: NodePort
+  ports:
+    - name: web
+      protocol: TCP
+      port: 8081
+      targetPort: 8081
+      nodePort: 10102
+```
