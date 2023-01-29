@@ -30,4 +30,6 @@
 # 28. java添加证书验证keytool Dockerfile
 # 29. docker-compose 安装使用nextcloud个人网盘
 # 30. k8s nexus
+# 31. 各种服务接入ldap
+# 32. nextcloud个人网盘搭建
 ```
