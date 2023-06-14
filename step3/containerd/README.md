@@ -54,5 +54,10 @@
 #所有的细节都参考下面的链接,
 # https://www.modb.pro/db/168772
 ```
+
+# 效果展示图
+```
+可以通过下面的图看到，直接可以在kibana的filter中选择namespace和deployment就可以查询日志了，也是非常的简单方便，省去了很多其他不中用的字段
+```
 <img width="1853" alt="image" src="https://github.com/wuchenyanghaoshuai/others/assets/39818267/b5aa1f01-b2e5-4033-a12d-45bd069ecb37">
 
