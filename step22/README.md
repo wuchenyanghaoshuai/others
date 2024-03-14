@@ -1,4 +1,5 @@
 ```
+1
 1. 如果集群有storageclass忽略deploy下的nfs,因为这个是部署一个由nfs提供的storageclass
   1.1 如果没有storageclass的话,如果由mysql也可以，因为storageclass是为了作为mysql的存储来部署的
   1.2 如果你既没有mysql也没有storageclass，那就修改deploy下的nfs的地址,和nfs的路径就可以了，然后直接apply
