@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nacos
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - "nacos.xxxx.cn"
+    secretName: xx-cn-secret
+  rules:
+    - host: nacos.xxx.cn
+      http:
+        paths:
+          - backend:
+              service:
+                name: nacos-headless
+                port:
+                  number: 8848
+            path: /
+            pathType: ImplementationSpecific
+

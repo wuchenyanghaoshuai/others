@@ -1,0 +1,143 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nacos-headless
+  labels:
+    app: nacos-headless
+spec:
+  ports:
+    - name: server
+      protocol: TCP
+      port: 8848
+      targetPort: 8848
+      nodePort: 10330
+    - name: client-rpc
+      protocol: TCP
+      port: 9848
+      targetPort: 9848
+    - name: raft-rpc
+      protocol: TCP
+      port: 9849
+      targetPort: 9849
+    - name: old-raft-rpc
+      protocol: TCP
+      port: 7848
+      targetPort: 7848
+  selector:
+    app: nacos
+  type: NodePort
+  sessionAffinity: None
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nacos-cm
+data:
+  mysql.db.name: nacos_pre
+  mysql.host: mysql.rds.aliyuncs.com
+  mysql.password: xxxx
+  mysql.port: '3306'
+  mysql.user: nacos_pre
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: nacos
+  labels:
+    k8s.kuboard.cn/name: nacos
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nacos
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nacos
+      annotations:
+        pod.alpha.kubernetes.io/initialized: 'true'
+    spec:
+      containers:
+        - name: k8snacos
+          image: 'nacos/nacos-server:2.0.3'
+          ports:
+            - name: client
+              containerPort: 8848
+              protocol: TCP
+            - name: client-rpc
+              containerPort: 9848
+              protocol: TCP
+            - name: raft-rpc
+              containerPort: 9849
+              protocol: TCP
+            - name: old-raft-rpc
+              containerPort: 7848
+              protocol: TCP
+          env:
+            - name: NACOS_REPLICAS
+              value: '3'
+            - name: MYSQL_SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: nacos-cm
+                  key: mysql.host
+            - name: MYSQL_SERVICE_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: nacos-cm
+                  key: mysql.db.name
+            - name: MYSQL_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: nacos-cm
+                  key: mysql.port
+            - name: MYSQL_SERVICE_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: nacos-cm
+                  key: mysql.user
+            - name: MYSQL_SERVICE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: nacos-cm
+                  key: mysql.password
+            - name: MODE
+              value: cluster
+            - name: NACOS_SERVER_PORT
+              value: '8848'
+            - name: PREFER_HOST_MODE
+              value: hostname
+            - name: MYSQL_SERVICE_DB_PARAM
+              value: >-
+                characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false
+            - name: NACOS_SERVERS
+              value: >-
+                nacos-0.nacos-headless.nacos-pre.svc.cluster.local:8848
+                nacos-1.nacos-headless.nacos-pre.svc.cluster.local:8848
+                nacos-2.nacos-headless.nacos-pre.svc.cluster.local:8848
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: 2
+            requests:
+              cpu: 500m
+              memory: 512Mi
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nacos
+              topologyKey: kubernetes.io/hostname
+  serviceName: nacos-headless
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10
+
