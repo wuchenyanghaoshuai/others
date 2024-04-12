@@ -44,6 +44,6 @@ confluence conf配置方面
 以文档来说 就是/opt/atlassian/confluence/conf/server.xml 修改之前要先备份
 然后只增加红色部分就可以了根据自己公司域名需要
 scheme="https" secure="true" proxyName="wiki.ailieyun.com" proxyPort="443"
-然后useHttpOnly="true" 去掉
+然后useHttpOnly="true" 去掉,我的已经去掉了所以图片看不到
 ```
 ![image](https://github.com/wuchenyanghaoshuai/others/assets/39818267/2820316f-8137-45bc-9727-454875c21dcc)
