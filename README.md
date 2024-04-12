@@ -32,4 +32,6 @@
 # 30. k8s nexus
 # 31. 各种服务接入ldap
 # 32. nextcloud个人网盘搭建
+# 33. wiki搭建
+# 34. jira搭建
 ```
