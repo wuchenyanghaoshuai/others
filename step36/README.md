@@ -12,6 +12,9 @@ step3
   2 deploy那块修改成hostnetwork: true 和 nodename ，防止deployment 的pod漂移
 step4
   下面放修改的截图
+step5
+  下面附上我自己的yaml，大家根据我的集群版本修改哈，我是1.23.1版本
+  另外还有测试的ingress和yaml，有证书的话就保留tls字段，没有的话就删除
 ```
 ![image](https://github.com/wuchenyanghaoshuai/others/assets/39818267/1eece38c-8fb2-493d-89f9-3a4925789f07)
 ![image](https://github.com/wuchenyanghaoshuai/others/assets/39818267/200605a8-621f-4933-82ba-f55e21750776)
