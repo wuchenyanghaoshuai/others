@@ -34,4 +34,5 @@
 # 32. nextcloud个人网盘搭建
 # 33. wiki搭建
 # 34. jira搭建
+# 35. 解决kubeconfig的ip问题
 ```
