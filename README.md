@@ -35,4 +35,5 @@
 # 33. wiki搭建
 # 34. jira搭建
 # 35. 解决kubeconfig的ip问题
+# 36. 解决ECS创建k8s使用外部的SLB
 ```
