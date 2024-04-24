@@ -36,4 +36,5 @@
 # 34. jira搭建
 # 35. 解决kubeconfig的ip问题
 # 36. 解决ECS创建k8s使用外部的SLB
+# 37. KEDA对k8s集群pod进行自动扩缩容
 ```
