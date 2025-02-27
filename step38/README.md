@@ -31,7 +31,7 @@ docker run -d --name gitlab-runner --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
   gitlab/gitlab-runner:latest
 
-2. 注册gitlab-runner(这个只是一个命令，需要在gitlab中执行，需要给runner打一个kubernetes的标签)
+2. 注册gitlab-runner(这个只是一个命令，需要在gitlab中执行，需要给runner打一个kubernetes的标签,下面的gitlab-ci有提到将sed修改过的deploy.yamlpush到gitlab中，可以使用runner的公钥放到gitlab里)
 docker exec -it gitlab-runner gitlab-runner register
 3. 查看gitlab-runner的状态
 docker exec -it gitlab-runner gitlab-runner status
