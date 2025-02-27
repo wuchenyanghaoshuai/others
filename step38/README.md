@@ -1,6 +1,4 @@
-```shell
-本文介绍如何在Gitlab-CI中使用kaniko构建镜像，并推送到ACR。
-```
+# 本文介绍如何在Gitlab-CI中使用kaniko构建镜像，并推送到ACR。
 
 ## 1 安装gitlab
 ```shell
@@ -378,4 +376,17 @@ build:
 
 
 ## 6 下面我贴上你把源代码push到test分支以后gitlab-ci做的一些事情
-​​​​​​
+
+### 代码目录结构
+​​​​​​https://i-blog.csdnimg.cn/direct/403b874b16574c438a426204f71bfb33.png
+### 推送到gitlab的test分支
+https://i-blog.csdnimg.cn/direct/9d729eb37b1b4e109637f704dbea0091.png
+### 查看runner有没有流水线任务
+https://i-blog.csdnimg.cn/direct/c565672b22b24beca7f38c51ebbf8a4a.png
+https://i-blog.csdnimg.cn/direct/682878e99c564801bd53574b889a1c42.png
+### 查看k8s有没有生成job
+https://i-blog.csdnimg.cn/direct/5516e0f5b3874993ae1d2dc7f4bc1ffb.png
+https://i-blog.csdnimg.cn/direct/fc27e863c7fb4e76afe764d3c63413db.png
+### 查看阿里云CR有没有image
+https://i-blog.csdnimg.cn/direct/35549a8c7a4241a4ae62261da8a730c2.png
+https://i-blog.csdnimg.cn/direct/5c6c06898a554e55a98ed6ee371cbab2.png
