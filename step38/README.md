@@ -390,3 +390,9 @@ https://i-blog.csdnimg.cn/direct/fc27e863c7fb4e76afe764d3c63413db.png
 ### 查看阿里云CR有没有image
 https://i-blog.csdnimg.cn/direct/35549a8c7a4241a4ae62261da8a730c2.png
 https://i-blog.csdnimg.cn/direct/5c6c06898a554e55a98ed6ee371cbab2.png
+
+
+## 7 csdn地址
+```
+https://blog.csdn.net/who__are__you_/article/details/145846418
+```
