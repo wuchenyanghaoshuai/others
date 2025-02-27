@@ -1,7 +1,6 @@
 ```shell
 本文介绍如何在Gitlab-CI中使用kaniko构建镜像，并推送到ACR。
 ```
-https://github.com/wuchenyanghaoshuai/others/security/secret-scanning/unblock-secret/2tbibYcsXywrg9rrMLQu6Uc0IwD
 
 ## 1 安装gitlab
 ```shell
