@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/b57eb1d8-5a45-4ce5-98d3-e95a84df7ec2)![image](https://github.com/user-attachments/assets/7232a569-a652-4171-8f3a-3430e2df4295)# 本文介绍如何使用Opentelemetry+jaeger实现分布式链路追踪。
+# 本文介绍如何使用Opentelemetry+jaeger实现分布式链路追踪。
 ## 1. 安装CertManager 首选
 ```shell
 # 地址在 https://cert-manager.io/docs/installation/kubectl
