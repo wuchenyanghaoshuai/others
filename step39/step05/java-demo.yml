@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-demo
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-demo
+  template:
+    metadata:
+      labels:
+        app: java-demo
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9180"
+        prometheus.io/path: /metrics
+        instrumentation.opentelemetry.io/inject-java: "true"
+    spec:
+      containers:
+        - name: java-demo
+          image: registry.cn-hangzhou.aliyuncs.com/wuchenyang/java-demo:test-b0cbb8
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 2
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+          env:
+          - name: "JAVA_OPTS"
+            value: "-Xms1g -Xmx1g -javaagent:/data/agent/skywalking-agent.jar -javaagent:/data/agent/jmx_prometheus_javaagent-0.14.0.jar=9180:/data/agent/jmx_exporter.yml"
+          - name : PROFILE
+            value: test
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-demo
+spec:
+  selector:
+    app: java-demo
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000
+  type: NodePort
