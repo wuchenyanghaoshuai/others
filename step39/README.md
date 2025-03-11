@@ -305,11 +305,13 @@ spec:
 
 ### 注意
 ```shell
-go跟java服务不一样的地方在于java是以initcontainer的方式，go是sidcar的方式，go项目启动以后是2/2的方式,如果你kubectl get pods 去看的话
 如果你要使用我的go程序，需要提前在你的环境里准备好mysql环境，并且创建好数据库，表结构可以参考我的sql文件，具体看docker目录中详细解释
 由于go的ebpf插桩在operator的0.88版本开始，我的k8s版本为1.23.1,所以我本次使用的是v0.100.0，做测试的时候，一定要看好自己的k8s版本与operator版本的对应关系
 按照官方文档，需要在注解里添加主程序的位置
+Go 自动注入的实现依赖于 eBPF（uprobe），但当前环境不支持所需的内核功能。
 由于我的系统使用的是centos7.9，内核版本默认的是3.10.x，所以需要升级内核版本，要不然的话在go自动插桩的时候那个会直接报错，但是不会影响服务正常
+如果你是centos7.9的话得需要升级一下，如果你的内核高于我这个版本5.2.x就可以,则不需要
+go跟java服务不一样的地方在于java是以initcontainer的方式，go是sidcar的方式，go项目启动以后是2/2的方式,如果你kubectl get pods 去看的话
 升级步骤如下(所有节点都需要执行)：
   参考文档: https://www.jb51.net/article/265146.htm
   下载地址: http://193.49.22.109/elrepo/kernel/el7/x86_64/RPMS/
