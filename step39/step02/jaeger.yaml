@@ -45,3 +45,22 @@ spec:
       protocol: TCP
       port: 4317
       targetPort: 4317      
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-jager
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: jager.wuchenyangzhendehaoshuai.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: jaeger
+                port:
+                  number: 16686
+            path: /
+            pathType: ImplementationSpecific
