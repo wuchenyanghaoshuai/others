@@ -305,6 +305,7 @@ spec:
 
 ### 注意
 ```shell
+go跟java服务不一样的地方在于java是以initcontainer的方式，go是sidcar的方式，go项目启动以后是2/2的方式,如果你kubectl get pods 去看的话
 如果你要使用我的go程序，需要提前在你的环境里准备好mysql环境，并且创建好数据库，表结构可以参考我的sql文件，具体看docker目录中详细解释
 由于go的ebpf插桩在operator的0.88版本开始，我的k8s版本为1.23.1,所以我本次使用的是v0.100.0，做测试的时候，一定要看好自己的k8s版本与operator版本的对应关系
 按照官方文档，需要在注解里添加主程序的位置
@@ -410,10 +411,10 @@ spec:
 ## 8. 访问Go项目以及jaeger-ui
 
 ### 浏览器输入 gin.wuchenyangzhendehaoshuai.com
-### 此处一张照片
 ### 登录后台系统(用户名密码为admin/password),默认是/login页面,也可以直接/home跳过登录
-### 此处一张照片
-### 浏览器输入 jaeger.wuchenyangzhendehaoshuai.com
-### 此处一张照片
-### 选择相对应的服务
-### 此处一张照片
+![image](https://github.com/user-attachments/assets/312e875d-bbb2-4b79-9db9-7a0e69598c3a)
+![image](https://github.com/user-attachments/assets/eb9e7e3a-55a8-4b3b-94e8-c2b6e9b55dc5)
+### 浏览器输入 jaeger.wuchenyangzhendehaoshuai.com,选择相对应的服务
+![image](https://github.com/user-attachments/assets/e0469779-7a7f-44e9-8a07-7f964a702e23)
+![image](https://github.com/user-attachments/assets/f8e2b5be-d7f8-463a-a07f-b3d3fa5dd3fa)
+
