@@ -114,11 +114,9 @@ flask==3.1.0
 ```
 
 
-```shell
-cat kaniko-pod.yaml
-```
 
 ```yaml
+cat kaniko-pod.yaml
 
 apiVersion: v1
 kind: Pod
